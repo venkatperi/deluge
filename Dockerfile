@@ -1,16 +1,18 @@
 FROM phusion/baseimage:0.9.11
-MAINTAINER needo <needo@superhero.org>
+MAINTAINER needo <venkatperi@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Set correct environment variables
-ENV HOME /root
+ENV HOME 	/root
+ENV UID 	21000
+ENV GID 	21000
+ENV WEBPORT	8112
+ENV PORT	58846
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
 
-# Fix a Debianism of the nobody's uid being 65534
-RUN usermod -u 99 nobody
-RUN usermod -g 100 nobody
+RUN groupadd -g $GID deluge && useradd -g deluge -u $UID deluge
 
 ADD sources.list /etc/apt/
 RUN apt-get update -qq
@@ -19,9 +21,10 @@ RUN apt-get install -qy deluged deluge-web unrar unzip p7zip
 #Path to a directory that only contains the deluge.conf
 VOLUME /config
 VOLUME /downloads
+VOLUME /log
 
 EXPOSE 8112
-EXPOSE 58846
+EXPOSE 58846 
 
 # Add deluged to runit
 RUN mkdir /etc/service/deluged

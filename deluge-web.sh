@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec /sbin/setuser nobody deluge-web -c /config
+exec /sbin/setuser deluge deluge-web -c /config

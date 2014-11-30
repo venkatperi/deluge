@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec /sbin/setuser nobody deluged -d -c /config -L info -l /config/deluged.log
+exec /sbin/setuser deluge deluged -d -c /config -L info -l /log/deluged.log
