@@ -1,0 +1,4 @@
+#!/bin/bash
+
+chown -R $USERNAME:$GROUPNAME /etc/deluge
+chown -R $USERNAME:$GROUPNAME /var/{lib,run,log}/deluge
